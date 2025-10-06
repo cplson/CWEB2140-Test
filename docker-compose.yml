@@ -1,7 +1,7 @@
 
 version: "3.8"
 services:
-  snake:
+  snaketestapp:
     image: amalan06/testauto:latest
     build: .
     container_name: testauto
