@@ -2,9 +2,9 @@
 version: "3.8"
 services:
   snaketestapp:
-    image: amalan06/testauto:latest
+    image: jacjamg/testauto:latest
     build: .
-    container_name: testauto02
+    container_name: testauto
     ports:
       - "80:3000"
     environment:
