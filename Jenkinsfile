@@ -5,8 +5,8 @@ pipeline
      environment
      {
         // Docker Hub credentials ID stored in Jenkins
-        DOCKERHUB_CREDENTIALS = 'cweb-2140-01'
-        IMAGE_NAME = 'amalan06/testauto:latest'
+        DOCKERHUB_CREDENTIALS = 'cweb_2140'
+        IMAGE_NAME = 'jacjamg/testauto:latest'
      }
 
     stages 
@@ -19,9 +19,17 @@ pipeline
             }
         }
 
+        stage('SAST')
+        {
+            steps
+            {
+                sh 'echo Running SAST scan...'
+            }
+        }
+
         stage('BUILD-AND-TAG')
         {
-            agent{ label 'CWEB-2040-01-app-server'}
+            agent{ label 'CWEB2140-app-server'}
             steps
             {
                 script
@@ -38,7 +46,7 @@ pipeline
 
         stage('POST-TO-DOCKERHUB')
         {
-            agent{ label 'CWEB-2040-01-app-server'}
+            agent{ label 'CWEB2140-app-server'}
             steps
             {
                 script
@@ -57,7 +65,7 @@ pipeline
         
         stage('DEPLOYMENT')
         {
-            agent{ label 'CWEB-2040-01-app-server'}
+            agent{ label 'CWEB2140-app-server'}
             steps
             {
                 echo "Starting deployment using docker-compose..."
